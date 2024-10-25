@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://be1noq551kuf5"]
+
+[ext_resource type="Texture2D" uid="uid://cp1ld524hc55b" path="res://Textures/Development/Prototype Textures/Orange/texture_01.png" id="1_tjqbm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iosmd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q1o46"]
+albedo_texture = ExtResource("1_tjqbm")
+
+[sub_resource type="BoxMesh" id="BoxMesh_fopnc"]
+material = SubResource("StandardMaterial3D_q1o46")
+
+[node name="PrototypeWall1" type="StaticBody3D"]
+collision_mask = 7
+
+[node name="CollisionBox" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_iosmd")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("BoxMesh_fopnc")

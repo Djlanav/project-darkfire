@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://5qjdsmxr7sj8"]
+
+[ext_resource type="Texture2D" uid="uid://down3rowrgutj" path="res://Textures/Development/Prototype Textures/Gray/texture_08.png" id="1_ca0b1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ykflj"]
+size = Vector3(41.4575, 0.300873, 39.2851)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m16nu"]
+albedo_texture = ExtResource("1_ca0b1")
+uv1_scale = Vector3(16, 16, 16)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h8gqy"]
+material = SubResource("StandardMaterial3D_m16nu")
+
+[node name="PrototypeGround" type="StaticBody3D"]
+
+[node name="CollisionBox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.639, -0.00294495, -1.84117)
+shape = SubResource("BoxShape3D_ykflj")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(46.3193, 0, 0, 0, 0.3, 0, 0, 0, 39.3139, -1.96669, 0, -1.86487)
+mesh = SubResource("BoxMesh_h8gqy")
