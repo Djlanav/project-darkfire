@@ -28,12 +28,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544727, 0)
 script = ExtResource("2_to0fs")
 
 [node name="SFXComponent" parent="." instance=ExtResource("5_4ktyq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00544882, -0.451923, -0.180651)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.124481, 1.13518, -0.656423)
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_t4iim")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.34407, 0.206489)
+max_health = 100
 
 [node name="PlayerInputComponent" parent="." instance=ExtResource("5_wxa0a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04457, 0.969602, -0.287252)
 
+[connection signal="health_zero" from="HealthComponent" to="." method="_on_health_component_health_zero"]
 [connection signal="movement_begin" from="PlayerInputComponent" to="." method="_on_player_input_component_movement_begin"]
+[connection signal="movement_end" from="PlayerInputComponent" to="." method="_on_player_input_component_movement_end"]

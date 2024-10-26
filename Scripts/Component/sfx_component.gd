@@ -21,7 +21,8 @@ func play_looping() -> void:
 
 
 func stop_looping() -> void:
-	looping_sfx.stop()
+	if looping_sfx.playing and not Input.is_anything_pressed():
+		looping_sfx.stop()
 
 
 # Called when the node enters the scene tree for the first time.

@@ -37,9 +37,6 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	
-	if velocity <= Vector3.ZERO:
-		sfx_component.stop_looping()
-	
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody3D:
@@ -52,3 +49,7 @@ func _on_health_component_health_zero() -> void:
 
 func _on_player_input_component_movement_begin() -> void:
 	sfx_component.play_looping()
+
+
+func _on_player_input_component_movement_end() -> void:
+	sfx_component.stop_looping()
