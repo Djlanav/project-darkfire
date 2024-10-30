@@ -15,6 +15,7 @@ bus = &"SFX"
 
 [node name="Ambience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_twqkq")
+autoplay = true
 bus = &"Ambience"
 
 [connection signal="finished" from="LoopingSFX" to="." method="_on_looping_sfx_finished"]

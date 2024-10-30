@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://c132wqyjajus"]
+[gd_scene load_steps=9 format=3 uid="uid://c132wqyjajus"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/player.gd" id="1_bh53k"]
 [ext_resource type="Script" path="res://Scripts/Gameplay/player_camera.gd" id="2_to0fs"]
 [ext_resource type="PackedScene" uid="uid://bgipihsq8wx5c" path="res://Components/health_component.tscn" id="4_t4iim"]
 [ext_resource type="PackedScene" uid="uid://b2mqdrvgix4wh" path="res://Components/sfx_component.tscn" id="5_4ktyq"]
 [ext_resource type="PackedScene" uid="uid://bh4skt3i0l186" path="res://Components/player_input_component.tscn" id="5_wxa0a"]
+[ext_resource type="PackedScene" uid="uid://cghxhp735mp0e" path="res://Components/GUI/state_display.tscn" id="6_7o2co"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_lckba"]
 
@@ -27,6 +28,13 @@ shape = SubResource("BoxShape3D_1d1pi")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544727, 0)
 script = ExtResource("2_to0fs")
 
+[node name="PickUpRange" type="RayCast3D" parent="PlayerCamera"]
+transform = Transform3D(1, 0, 0, 0, -1.02156e-07, -1, 0, 2.33706, -4.37114e-08, 0, -0.0645372, -0.477913)
+collision_mask = 20
+
+[node name="HoldPoint" type="Node3D" parent="PlayerCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0222445, 0.183671, -1.73519)
+
 [node name="SFXComponent" parent="." instance=ExtResource("5_4ktyq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.124481, 1.13518, -0.656423)
 
@@ -37,6 +45,11 @@ max_health = 100
 [node name="PlayerInputComponent" parent="." instance=ExtResource("5_wxa0a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04457, 0.969602, -0.287252)
 
+[node name="StateDisplay" parent="." instance=ExtResource("6_7o2co")]
+offset_right = -1152.0
+offset_bottom = -648.0
+
+[connection signal="movement_begin" from="." to="SFXComponent" method="_on_player_movement_begin"]
+[connection signal="movement_end" from="." to="SFXComponent" method="_on_player_movement_end"]
 [connection signal="health_zero" from="HealthComponent" to="." method="_on_health_component_health_zero"]
-[connection signal="movement_begin" from="PlayerInputComponent" to="." method="_on_player_input_component_movement_begin"]
-[connection signal="movement_end" from="PlayerInputComponent" to="." method="_on_player_input_component_movement_end"]
+[connection signal="pick_up" from="PlayerInputComponent" to="." method="_on_player_input_component_pick_up"]

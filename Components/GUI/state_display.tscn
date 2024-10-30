@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://cghxhp735mp0e"]
+
+[ext_resource type="Script" path="res://Scripts/Component/GUI/state_display.gd" id="1_3t21o"]
+
+[node name="StateDisplay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3t21o")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_right = 305.0
+offset_bottom = 40.0
+bbcode_enabled = true
+text = "[font_size=25]Player State:    [color=green]%s[/color][/font_size]"

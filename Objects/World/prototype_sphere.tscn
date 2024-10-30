@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvwb0xe3no0k5"]
+
+[ext_resource type="Texture2D" uid="uid://wm7coydwwyrh" path="res://Textures/Development/Prototype Textures/Orange/texture_02.png" id="1_8klul"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_maywo"]
+rough = true
+bounce = 0.62
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_adq3w"]
+radius = 0.154811
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oj0yp"]
+albedo_texture = ExtResource("1_8klul")
+
+[sub_resource type="SphereMesh" id="SphereMesh_j6vhk"]
+material = SubResource("StandardMaterial3D_oj0yp")
+
+[node name="prototype_sphere" type="RigidBody3D"]
+collision_layer = 31
+collision_mask = 31
+mass = 100.0
+physics_material_override = SubResource("PhysicsMaterial_maywo")
+
+[node name="CollisionBox" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_adq3w")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.30042, 0, 0, 0, 0.30042, 0, 0, 0, 0.30042, 0, 0, 0)
+mesh = SubResource("SphereMesh_j6vhk")

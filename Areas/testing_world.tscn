@@ -1,21 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://bcmrrbg6qdm84"]
+[gd_scene load_steps=11 format=3 uid="uid://bcmrrbg6qdm84"]
 
 [ext_resource type="PackedScene" uid="uid://5qjdsmxr7sj8" path="res://Objects/World/prototype_ground.tscn" id="1_g0g4q"]
 [ext_resource type="PackedScene" uid="uid://c132wqyjajus" path="res://Entities/player.tscn" id="2_wvybn"]
+[ext_resource type="Texture2D" uid="uid://cp53xw8lnyfh1" path="res://Textures/HDR Skyboxes/klippad_dawn_1_2k.hdr" id="3_3hjnk"]
 [ext_resource type="PackedScene" uid="uid://dn4pis21idnm3" path="res://Objects/World/prototype_rigibody.tscn" id="3_qj456"]
 [ext_resource type="PackedScene" uid="uid://be1noq551kuf5" path="res://Objects/prototype_wall_1.tscn" id="4_yywp0"]
 [ext_resource type="VoxelGIData" uid="uid://c7g6m2bydvbki" path="res://Data/VoxelGI/Testing World/tw_vxgi_data.res" id="5_xp7jd"]
+[ext_resource type="PackedScene" uid="uid://cvwb0xe3no0k5" path="res://Objects/World/prototype_sphere.tscn" id="6_6n747"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vmbmc"]
-sky_top_color = Color(0.338267, 0.692887, 0.974702, 1)
-ground_bottom_color = Color(0.0974757, 0.105891, 0.105236, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jb001"]
+panorama = ExtResource("3_3hjnk")
+energy_multiplier = 0.5
 
-[sub_resource type="Sky" id="Sky_xt5o6"]
-sky_material = SubResource("ProceduralSkyMaterial_vmbmc")
+[sub_resource type="Sky" id="Sky_udwvt"]
+sky_material = SubResource("PanoramaSkyMaterial_jb001")
 
 [sub_resource type="Environment" id="Environment_w8bdj"]
 background_mode = 2
-sky = SubResource("Sky_xt5o6")
+sky = SubResource("Sky_udwvt")
 ambient_light_source = 2
 
 [node name="TestingWorld" type="Node3D"]
@@ -99,3 +101,12 @@ transform = Transform3D(-1, 0, 1.19209e-07, 0, 1, 0, -1.19209e-07, 0, -1, 4, 4, 
 
 [node name="PrototypeWall8" parent="." instance=ExtResource("4_yywp0")]
 transform = Transform3D(-1, 0, 1.19209e-07, 0, 1, 0, -1.19209e-07, 0, -1, -4, 4, 7)
+
+[node name="prototype_sphere" parent="." instance=ExtResource("6_6n747")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.389954, 0.547127, -3.71642)
+
+[node name="prototype_sphere2" parent="." instance=ExtResource("6_6n747")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.389954, 0.86175, -4.81552)
+
+[node name="prototype_sphere3" parent="." instance=ExtResource("6_6n747")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.389954, 0.86175, -2.10693)
