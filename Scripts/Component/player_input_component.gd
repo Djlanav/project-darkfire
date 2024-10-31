@@ -3,6 +3,7 @@ class_name PlayerInputComponent
 
 
 signal pick_up
+signal toggle_flashlight
 
 
 var is_mouse_captured: bool
@@ -45,41 +46,11 @@ func _process(_delta: float) -> void:
 	elif Input.is_action_just_pressed("hold_obj"):
 		pick_up.emit()
 	
+	elif Input.is_action_just_pressed("flashlight"):
+		toggle_flashlight.emit()
+	
 	elif Input.is_action_just_pressed("take_screenshot"):
 		await RenderingServer.frame_post_draw
 		var time = Time.get_datetime_string_from_system()
 		var path = "user://screenshot_{date}".format({"date": time}).replace("T", "_")
 		get_viewport().get_texture().get_image().save_png(path)
-
-
-#func check_movement(is_released: bool) -> void:
-	#if not is_moving and not is_released:
-		#movement_begin.emit()
-		#is_moving = true
-	#elif is_moving and is_released:
-		#movement_end.emit()
-		#is_moving = false
-#
-#
-#func check_mapped_action(is_released: bool) -> void:
-	#match mapped_action:
-		#"forward":
-			#check_movement(is_released)
-		#"backward":
-			#check_movement(is_released)
-		#"left":
-			#check_movement(is_released)
-		#"right":
-			#check_movement(is_released)
-#
-#
-#func _unhandled_input(event: InputEvent) -> void:
-	#var event_str := event.as_text()
-	#
-	#if event.is_pressed() and event_action_map.has(event_str):
-		#mapped_action = event_action_map[event_str]
-		#check_mapped_action(false)
-	#
-	#elif event.is_released() and event_action_map.has(event_str):
-		#mapped_action = event_action_map[event_str]
-		#check_mapped_action(true)

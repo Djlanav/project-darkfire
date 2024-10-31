@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cm1owowko7xp6"]
+
+[ext_resource type="Texture2D" uid="uid://d1acloym7au8h" path="res://Textures/crosshair.png" id="1_exnrx"]
+
+[node name="Crosshair" type="TextureRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_exnrx")

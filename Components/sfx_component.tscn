@@ -15,6 +15,7 @@ bus = &"SFX"
 
 [node name="Ambience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_twqkq")
+volume_db = 15.928
 autoplay = true
 bus = &"Ambience"
 

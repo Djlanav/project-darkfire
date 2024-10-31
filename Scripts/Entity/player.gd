@@ -10,8 +10,9 @@ signal movement_end
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var input_component: PlayerInputComponent = $PlayerInputComponent
 @onready var sfx_component: SFXComponent = $SFXComponent
-@onready var pick_up: RayCast3D = $PlayerCamera/PickUpRange
-@onready var hold_point: Node3D = $PlayerCamera/HoldPoint
+@onready var pick_up: RayCast3D = %PickUpRange
+@onready var hold_point: Node3D = %HoldPoint
+@onready var flashlight: SpotLight3D = %Flashlight
 
 
 enum State {
@@ -123,3 +124,10 @@ func _on_player_input_component_pick_up() -> void:
 	if pick_up.is_colliding() and pick_up.get_collider() is RigidBody3D:
 		held_object = pick_up.get_collider()
 		held_object.freeze = true
+
+
+func _on_player_input_component_toggle_flashlight() -> void:
+	if flashlight.light_energy >= 1:
+		flashlight.light_energy = 0
+	else:
+		flashlight.light_energy = 2.3
