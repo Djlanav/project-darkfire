@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://cq2rfa0xop42e"]
+[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://bl4rsiixvrv6h"]
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_p5t5a"]
 resource_name = "Reverb"
@@ -7,6 +7,7 @@ damping = 0.27
 
 [sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_5pdb7"]
 resource_name = "Amplify"
+volume_db = 24.0
 
 [resource]
 bus/1/name = &"SFX"

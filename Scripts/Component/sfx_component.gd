@@ -2,7 +2,14 @@ extends Node3D
 class_name SFXComponent
 
 
+@export var looping_stream: AudioStream
+@export var music_stream: AudioStream
+@export var ambience_stream: AudioStream
+@export var play_once_stream: AudioStream
+
+
 @onready var looping_sfx: AudioStreamPlayer3D = $LoopingSFX
+@onready var play_once: AudioStreamPlayer3D = $PlayOnce
 @onready var music: AudioStreamPlayer = $Music
 @onready var ambience: AudioStreamPlayer = $Ambience
 
@@ -22,6 +29,10 @@ var current_state := SFXState.STOP
 
 func _ready() -> void:
 	init_ambience_list()
+	looping_sfx.stream = looping_stream
+	play_once.stream = play_once_stream
+	music.stream = music_stream
+	ambience.stream = ambience_stream
 
 
 func _process(_delta: float) -> void:

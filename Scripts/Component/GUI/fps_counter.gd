@@ -1,14 +1,15 @@
-extends Node3D
+extends RichTextLabel
 
 
-@onready var lights: Node3D = $Lights
+var og_text: String
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	og_text = text
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	lights.rotation_degrees.y += 25 * delta
+	var formatted := og_text % Engine.get_frames_per_second()
+	text = formatted

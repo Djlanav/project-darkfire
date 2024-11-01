@@ -4,6 +4,8 @@ class_name PlayerInputComponent
 
 signal pick_up
 signal toggle_flashlight
+signal console_toggle
+signal paused
 
 
 var is_mouse_captured: bool
@@ -40,8 +42,10 @@ func _process(_delta: float) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		is_mouse_captured = false
 	
-	elif Input.is_action_just_pressed("quit"):
-		get_tree().quit()
+	elif Input.is_action_just_pressed("pause"):
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		paused.emit()
+		get_tree().paused = true
 	
 	elif Input.is_action_just_pressed("hold_obj"):
 		pick_up.emit()
@@ -49,8 +53,20 @@ func _process(_delta: float) -> void:
 	elif Input.is_action_just_pressed("flashlight"):
 		toggle_flashlight.emit()
 	
+	elif Input.is_action_just_pressed("open_console"):
+		open_console()
+	
 	elif Input.is_action_just_pressed("take_screenshot"):
 		await RenderingServer.frame_post_draw
 		var time = Time.get_datetime_string_from_system()
 		var path = "user://screenshot_{date}".format({"date": time}).replace("T", "_")
 		get_viewport().get_texture().get_image().save_png(path)
+
+
+func open_console() -> void:
+	if is_mouse_captured:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	console_toggle.emit()

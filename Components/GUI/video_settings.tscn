@@ -1,0 +1,74 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfuadag8ssogk"]
+
+[ext_resource type="Script" path="res://Scripts/Component/GUI/video_settings.gd" id="1_uoa75"]
+
+[node name="VideoSettings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uoa75")
+
+[node name="VsyncToggle" type="CheckButton" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 117.0
+offset_bottom = 47.0
+theme_override_font_sizes/font_size = 16
+button_pressed = true
+text = "Vsync  "
+
+[node name="Anti-Aliasing" type="Label" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 96.0
+offset_right = 80.0
+offset_bottom = 119.0
+text = "MSAA"
+
+[node name="OptionButton" type="OptionButton" parent="Anti-Aliasing"]
+layout_mode = 0
+offset_left = 56.0
+offset_right = 155.0
+offset_bottom = 31.0
+selected = 0
+item_count = 4
+popup/item_0/text = "Disabled"
+popup/item_1/text = "2x"
+popup/item_1/id = 1
+popup/item_2/text = "4x"
+popup/item_2/id = 2
+popup/item_3/text = "8x"
+popup/item_3/id = 3
+
+[node name="WindowMode" type="Label" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 168.0
+offset_right = 64.0
+offset_bottom = 191.0
+text = "Window Mode"
+
+[node name="WindowModeOption" type="OptionButton" parent="WindowMode"]
+layout_mode = 0
+offset_left = 120.0
+offset_right = 152.0
+offset_bottom = 24.0
+selected = 0
+item_count = 5
+popup/item_0/text = "Windowed"
+popup/item_1/text = "Minimized"
+popup/item_1/id = 1
+popup/item_2/text = "Maximized"
+popup/item_2/id = 2
+popup/item_3/text = "Fullscreen"
+popup/item_3/id = 3
+popup/item_4/text = "Exclusive Fullscreen"
+popup/item_4/id = 4
+
+[connection signal="toggled" from="VsyncToggle" to="." method="_on_vsync_toggle_toggled"]
+[connection signal="item_selected" from="Anti-Aliasing/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="WindowMode/WindowModeOption" to="." method="_on_window_mode_option_item_selected"]

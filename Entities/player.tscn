@@ -1,12 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://c132wqyjajus"]
+[gd_scene load_steps=15 format=3 uid="uid://c132wqyjajus"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/player.gd" id="1_bh53k"]
 [ext_resource type="Script" path="res://Scripts/Gameplay/player_camera.gd" id="2_to0fs"]
 [ext_resource type="PackedScene" uid="uid://cm1owowko7xp6" path="res://Components/GUI/crosshair.tscn" id="3_wd86n"]
+[ext_resource type="AudioStream" uid="uid://cl5ca1ttq2x5v" path="res://FX/SFX/concrete-footsteps-6752.mp3" id="4_hnpdj"]
 [ext_resource type="PackedScene" uid="uid://bgipihsq8wx5c" path="res://Components/health_component.tscn" id="4_t4iim"]
 [ext_resource type="PackedScene" uid="uid://b2mqdrvgix4wh" path="res://Components/sfx_component.tscn" id="5_4ktyq"]
+[ext_resource type="AudioStream" uid="uid://d2rbcekukg41q" path="res://FX/SFX/wind-ambience-14720.mp3" id="5_plc02"]
 [ext_resource type="PackedScene" uid="uid://bh4skt3i0l186" path="res://Components/player_input_component.tscn" id="5_wxa0a"]
 [ext_resource type="PackedScene" uid="uid://cghxhp735mp0e" path="res://Components/GUI/state_display.tscn" id="6_7o2co"]
+[ext_resource type="PackedScene" uid="uid://cmrfdlp25wcby" path="res://addons/simply-console/scenes/console-window/console_window.tscn" id="8_tvaix"]
+[ext_resource type="PackedScene" uid="uid://bpwht6wjgd2rt" path="res://Components/GUI/util_menu.tscn" id="9_mlm7s"]
+[ext_resource type="Script" path="res://Scripts/Component/GUI/fps_counter.gd" id="10_jrv6f"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_lckba"]
 
@@ -42,11 +47,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000983549, 0.0106555, -1.7
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.777589)
 light_energy = 0.0
-spot_range = 7.76786
-spot_angle = 30.579
+shadow_enabled = true
+spot_range = 13.6003
+spot_angle = 29.5533
 
 [node name="SFXComponent" parent="." instance=ExtResource("5_4ktyq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.124481, 1.13518, -0.656423)
+looping_stream = ExtResource("4_hnpdj")
+ambience_stream = ExtResource("5_plc02")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_t4iim")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.34407, 0.206489)
@@ -75,8 +83,33 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ConsoleWindow" parent="." instance=ExtResource("8_tvaix")]
+visible = false
+
+[node name="UtilMenu" parent="." instance=ExtResource("9_mlm7s")]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="FPSCounter" type="RichTextLabel" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -152.0
+offset_bottom = 39.0
+grow_horizontal = 0
+bbcode_enabled = true
+text = "[font_size=25]FPS:   [color=green]%d[/color]"
+script = ExtResource("10_jrv6f")
+
 [connection signal="movement_begin" from="." to="SFXComponent" method="_on_player_movement_begin"]
 [connection signal="movement_end" from="." to="SFXComponent" method="_on_player_movement_end"]
 [connection signal="health_zero" from="HealthComponent" to="." method="_on_health_component_health_zero"]
+[connection signal="console_toggle" from="PlayerInputComponent" to="." method="_on_player_input_component_console_toggle"]
+[connection signal="paused" from="PlayerInputComponent" to="UtilMenu" method="_on_player_input_component_paused"]
 [connection signal="pick_up" from="PlayerInputComponent" to="." method="_on_player_input_component_pick_up"]
 [connection signal="toggle_flashlight" from="PlayerInputComponent" to="." method="_on_player_input_component_toggle_flashlight"]

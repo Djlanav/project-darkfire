@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://cp53xw8lnyfh1" path="res://Textures/HDR Skyboxes/klippad_dawn_1_2k.hdr" id="3_3hjnk"]
 [ext_resource type="PackedScene" uid="uid://dn4pis21idnm3" path="res://Objects/World/prototype_rigibody.tscn" id="3_qj456"]
 [ext_resource type="PackedScene" uid="uid://be1noq551kuf5" path="res://Objects/prototype_wall_1.tscn" id="4_yywp0"]
-[ext_resource type="VoxelGIData" uid="uid://c7g6m2bydvbki" path="res://Data/VoxelGI/Testing World/tw_vxgi_data.res" id="5_xp7jd"]
 [ext_resource type="PackedScene" uid="uid://cvwb0xe3no0k5" path="res://Objects/World/prototype_sphere.tscn" id="6_6n747"]
+[ext_resource type="VoxelGIData" uid="uid://c7g6m2bydvbki" path="res://Data/VoxelGI/Testing World/tw_vxgi_data.res" id="8_s6468"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jb001"]
 panorama = ExtResource("3_3hjnk")
@@ -34,16 +34,22 @@ transform = Transform3D(0.463866, 0, 0, 0, 0.463866, 0, 0, 0, 0.463866, -0.16366
 environment = SubResource("Environment_w8bdj")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.820032, 0.572318, 0, -0.572318, 0.820032, 0, 1.3941, 0)
-light_angular_distance = 0.5
+transform = Transform3D(1, 0, 0, 0, 0.941764, 0.336273, 0, -0.336273, 0.941764, 0, 1.3941, 0)
+light_energy = 0.515
+light_angular_distance = 0.1
+light_bake_mode = 1
 shadow_enabled = true
+shadow_opacity = 0.87
+directional_shadow_split_2 = 0.523
 
 [node name="Lights" type="Node3D" parent="."]
+transform = Transform3D(0.0219719, 0, 0.999759, 0, 1, 0, -0.999759, 0, 0.0219719, 0, 0, -1.37753)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.71953, 1.14522, -0.0144253)
 light_color = Color(0.930753, 0.223569, 3.85046e-07, 1)
 light_energy = 16.0
+light_bake_mode = 1
 shadow_enabled = true
 shadow_bias = 0.005
 shadow_transmittance_bias = -7.061
@@ -54,6 +60,7 @@ shadow_blur = 0.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.31126, 1.12433, 0)
 light_color = Color(0, 0, 1, 1)
 light_energy = 12.798
+light_bake_mode = 1
 shadow_enabled = true
 shadow_bias = 0.005
 
@@ -61,6 +68,7 @@ shadow_bias = 0.005
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24671, 1.12433, -2.89634)
 light_color = Color(0, 1, 0.0901961, 1)
 light_energy = 16.0
+light_bake_mode = 1
 shadow_enabled = true
 shadow_bias = 0.005
 
@@ -78,9 +86,6 @@ collision_mask = 7
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.73024, 1.24718, -1.77321)
 collision_layer = 4
 collision_mask = 7
-
-[node name="VoxelGI" type="VoxelGI" parent="."]
-data = ExtResource("5_xp7jd")
 
 [node name="PrototypeWall1" parent="." instance=ExtResource("4_yywp0")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 4, 3)
@@ -114,3 +119,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.389954, 0.86175, -4.81552)
 
 [node name="prototype_sphere3" parent="." instance=ExtResource("6_6n747")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.389954, 0.86175, -2.10693)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.99911, 5.2892)
+light_bake_mode = 1
+omni_range = 8.98725
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.90453, 2.99911, -0.312005)
+light_bake_mode = 1
+omni_range = 8.98725
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.74634, 2.99911, -0.312005)
+light_bake_mode = 1
+omni_range = 8.98725
+
+[node name="VoxelGI" type="VoxelGI" parent="."]
+data = ExtResource("8_s6468")

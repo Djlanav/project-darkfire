@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgkmnj27c32dw"]
+
+[ext_resource type="Script" path="res://Scripts/Component/GUI/settings_menu.gd" id="1_1hcll"]
+[ext_resource type="PackedScene" uid="uid://bfuadag8ssogk" path="res://Components/GUI/video_settings.tscn" id="1_8u131"]
+[ext_resource type="Texture2D" uid="uid://lg6mpkb7tr5s" path="res://Textures/close_button.png" id="2_b0kvo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ukv33"]
+bg_color = Color(0.18359, 0.18359, 0.18359, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+
+[node name="SettingsMenu" type="Panel"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -419.0
+offset_top = -291.0
+offset_right = 440.0
+offset_bottom = 276.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ukv33")
+script = ExtResource("1_1hcll")
+
+[node name="Tabs" type="TabContainer" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 10.0
+offset_right = 851.0
+offset_bottom = 554.0
+current_tab = 0
+
+[node name="Video" type="Control" parent="Tabs"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VideoSettings" parent="Tabs/Video" instance=ExtResource("1_8u131")]
+layout_mode = 1
+offset_left = 11.0
+offset_top = 14.0
+offset_right = -120.0
+offset_bottom = -106.0
+
+[node name="Audio" type="Control" parent="Tabs"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="CloseButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 826.0
+offset_top = 12.0
+offset_right = 842.0
+offset_bottom = 28.0
+texture_normal = ExtResource("2_b0kvo")
+
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

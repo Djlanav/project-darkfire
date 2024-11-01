@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpwht6wjgd2rt"]
+
+[ext_resource type="Script" path="res://Scripts/Component/GUI/util_menu.gd" id="1_qhyy4"]
+[ext_resource type="PackedScene" uid="uid://ddnfys5ekn5lc" path="res://Components/GUI/pause_menu.tscn" id="2_vraj2"]
+[ext_resource type="PackedScene" uid="uid://bgkmnj27c32dw" path="res://Components/GUI/settings_menu.tscn" id="3_vsijq"]
+
+[node name="UtilMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qhyy4")
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_vraj2")]
+layout_mode = 1
+
+[node name="SettingsMenu" parent="." instance=ExtResource("3_vsijq")]
+process_mode = 2
+visible = false
+layout_mode = 1
+offset_left = -429.5
+offset_top = -283.5
+offset_right = 429.5
+offset_bottom = 283.5
+
+[connection signal="return_pressed" from="PauseMenu" to="." method="_on_pause_menu_return_pressed"]
+[connection signal="settings_pressed" from="PauseMenu" to="." method="_on_pause_menu_settings_pressed"]
+[connection signal="closed" from="SettingsMenu" to="PauseMenu" method="_on_settings_menu_closed"]

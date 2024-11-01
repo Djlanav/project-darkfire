@@ -7,12 +7,19 @@ signal movement_begin
 signal movement_end
 
 
+#region Components
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var input_component: PlayerInputComponent = $PlayerInputComponent
 @onready var sfx_component: SFXComponent = $SFXComponent
+#endregion
+
+
+#region Node References
 @onready var pick_up: RayCast3D = %PickUpRange
 @onready var hold_point: Node3D = %HoldPoint
 @onready var flashlight: SpotLight3D = %Flashlight
+@onready var console: Window = $ConsoleWindow
+#endregion
 
 
 enum State {
@@ -131,3 +138,10 @@ func _on_player_input_component_toggle_flashlight() -> void:
 		flashlight.light_energy = 0
 	else:
 		flashlight.light_energy = 2.3
+
+
+func _on_player_input_component_console_toggle() -> void:
+	if not console.visible:
+		console.show()
+	else:
+		console.hide()

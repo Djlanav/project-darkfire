@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddnfys5ekn5lc"]
+
+[ext_resource type="Script" path="res://Scripts/Component/GUI/pause_menu.gd" id="1_mwhra"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nqfmw"]
+bg_color = Color(0.28485, 0.28485, 0.28485, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+
+[node name="PauseMenu" type="Panel"]
+process_mode = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -93.0
+offset_right = 70.0
+offset_bottom = 93.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nqfmw")
+script = ExtResource("1_mwhra")
+
+[node name="OptionsList" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 132.0
+offset_bottom = 231.0
+
+[node name="ReturnButton" type="Button" parent="OptionsList"]
+layout_mode = 2
+text = "Return"
+
+[node name="SettingsButton" type="Button" parent="OptionsList"]
+layout_mode = 2
+text = "Settings"
+
+[node name="HelpButton" type="Button" parent="OptionsList"]
+layout_mode = 2
+text = "Help"
+
+[node name="AboutButton" type="Button" parent="OptionsList"]
+layout_mode = 2
+text = "About"
+
+[node name="ExitButton" type="Button" parent="OptionsList"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="OptionsList/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="OptionsList/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="OptionsList/ExitButton" to="." method="_on_exit_button_pressed"]

@@ -3,8 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://wm7coydwwyrh" path="res://Textures/Development/Prototype Textures/Orange/texture_02.png" id="1_8klul"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_maywo"]
-rough = true
-bounce = 0.62
+bounce = 0.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_adq3w"]
 radius = 0.154811
@@ -20,6 +19,7 @@ collision_layer = 31
 collision_mask = 31
 mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_maywo")
+continuous_cd = true
 
 [node name="CollisionBox" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_adq3w")
