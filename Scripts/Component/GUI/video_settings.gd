@@ -4,6 +4,7 @@ class_name VideoSettings
 
 @onready var msaa_option: OptionButton = $"Anti-Aliasing/OptionButton"
 @onready var window_mode: OptionButton = $WindowMode/WindowModeOption
+@onready var vsync_toggle: CheckButton = $VsyncToggle
 
 
 var msaa_3d_path := "rendering/anti_aliasing/quality/msaa_3d"
@@ -14,6 +15,11 @@ var wm = ProjectSettings.get_setting("display/window/size/mode")
 func _ready() -> void:
 	msaa_option.selected = msaa_3d
 	window_mode.selected = wm
+	
+	if DisplayServer.window_get_vsync_mode() != DisplayServer.VSYNC_DISABLED:
+		vsync_toggle.set_toggle_mode(true)
+	else:
+		vsync_toggle.set_toggle_mode(false)
 
 
 func _on_vsync_toggle_toggled(toggled_on: bool) -> void:

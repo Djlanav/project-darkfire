@@ -24,10 +24,6 @@ buses/default_bus_layout="res://custom_layout.tres"
 SoundStateManager="*res://Scripts/Autoloads/SoundStateManager.gd"
 ConsoleDataManager="*res://addons/simply-console/singletons/console_data_manager.gd"
 
-[display]
-
-window/size/mode=2
-
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/simply-console/plugin.cfg")
@@ -101,7 +97,7 @@ open_console={
 [physics]
 
 3d/run_on_separate_thread=true
-3d/solver/solver_iterations=32
+3d/physics_engine="JoltPhysics3D"
 
 [rendering]
 

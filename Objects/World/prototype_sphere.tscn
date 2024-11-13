@@ -1,6 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cvwb0xe3no0k5"]
+[gd_scene load_steps=9 format=3 uid="uid://cvwb0xe3no0k5"]
 
 [ext_resource type="Texture2D" uid="uid://wm7coydwwyrh" path="res://Textures/Development/Prototype Textures/Orange/texture_02.png" id="1_8klul"]
+[ext_resource type="Script" path="res://Scripts/Gameplay/phys_obj.gd" id="1_71n68"]
+[ext_resource type="PackedScene" uid="uid://b2mqdrvgix4wh" path="res://Components/sfx_component.tscn" id="2_ylbh4"]
+[ext_resource type="AudioStream" uid="uid://bl5wj48i0k1i8" path="res://FX/SFX/collide.ogg" id="3_1k343"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_maywo"]
 bounce = 0.5
@@ -20,6 +23,9 @@ collision_mask = 31
 mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_maywo")
 continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
+script = ExtResource("1_71n68")
 
 [node name="CollisionBox" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_adq3w")
@@ -27,3 +33,9 @@ shape = SubResource("SphereShape3D_adq3w")
 [node name="Model" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.30042, 0, 0, 0, 0.30042, 0, 0, 0, 0.30042, 0, 0, 0)
 mesh = SubResource("SphereMesh_j6vhk")
+
+[node name="SFXComponent" parent="." instance=ExtResource("2_ylbh4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00229615, 0.238265, -0.0106867)
+play_once_stream = ExtResource("3_1k343")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

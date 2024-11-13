@@ -3,8 +3,6 @@ class_name Player
 
 
 signal take_damage(damage: int)
-signal movement_begin
-signal movement_end
 
 
 #region Components
@@ -36,43 +34,25 @@ const INERTIA = 80.0
 
 var current_state: State
 var is_wasd: bool
-var signal_checks: Dictionary
 var held_object: RigidBody3D
 var last_held_position: Vector3 = Vector3.ZERO
-
-
-func _ready() -> void:
-	setup_signal_checks()
 
 
 func _process(_delta: float) -> void:
 	if held_object:
 		last_held_position = held_object.global_position
-		held_object.global_position = lerp(held_object.global_position, hold_point.global_position, 0.2)
+		held_object.global_position = lerp(held_object.global_position, 
+				hold_point.global_position, 0.2)
 	
 	match current_state:
 		State.MOVING:
-			if not signal_checks["movement_begin"]:
-				movement_begin.emit()
-				flip_signal_check("movement_begin")
+			sfx_component.set_sfx_state(sfx_component.LoopingState.PLAYING)
 		
 		State.IDLE:
-			if signal_checks["movement_begin"]:
-				movement_end.emit()
-				flip_signal_check("movement_begin")
+			sfx_component.set_sfx_state(sfx_component.LoopingState.PAUSED)
 		
 		State.FALLING:
-			if signal_checks["movement_begin"]:
-				movement_end.emit()
-				flip_signal_check("movement_begin")
-
-
-func flip_signal_check(signal_check: String) -> void:
-	var check = signal_checks[signal_check]
-	if check:
-		signal_checks[signal_check] = false
-	else:
-		signal_checks[signal_check] = true
+			sfx_component.set_sfx_state(sfx_component.LoopingState.PAUSED)
 
 
 func _physics_process(delta: float) -> void:
@@ -92,7 +72,9 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction := (transform.basis * Vector3(input_dir.x, 0, 
+			input_dir.y)).normalized()
+	
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
@@ -108,12 +90,6 @@ func _physics_process(delta: float) -> void:
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody3D:
 			c.get_collider().apply_central_impulse(-c.get_normal() * INERTIA)
-
-
-func setup_signal_checks() -> void:
-	var signal_list := get_signal_list()
-	for sig in signal_list:
-		signal_checks[sig.name] = false
 
 
 func _on_health_component_health_zero() -> void:
