@@ -1,0 +1,3 @@
+/home/cmh/Documents/Godot Projects/fps-project/cmake-build-debug/CMakeFiles/darkfire_module.dir
+/home/cmh/Documents/Godot Projects/fps-project/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/cmh/Documents/Godot Projects/fps-project/cmake-build-debug/CMakeFiles/rebuild_cache.dir

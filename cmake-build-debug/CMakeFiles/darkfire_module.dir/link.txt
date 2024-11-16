@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -g -shared  -o libdarkfire_module.so CMakeFiles/darkfire_module.dir/src/register_types.cpp.o CMakeFiles/darkfire_module.dir/src/SFXManager.cpp.o  -lgodot-cpp
