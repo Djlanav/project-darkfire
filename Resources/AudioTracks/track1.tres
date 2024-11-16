@@ -1,0 +1,7 @@
+[gd_resource type="RSoundTrack" load_steps=2 format=3 uid="uid://beyrwgo4rbcjk"]
+
+[ext_resource type="AudioStream" uid="uid://c42h04an0gtvu" path="res://FX/SFX/wind1.mp3" id="1_ifylq"]
+
+[resource]
+name = "wind1"
+stream = ExtResource("1_ifylq")

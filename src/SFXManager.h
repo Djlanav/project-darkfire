@@ -22,7 +22,7 @@ public:
     SFXManager();
     ~SFXManager();
 
-    void get_streams_from_array(TypedArray<AudioStream> streams);
+    void get_streams_from_array(TypedArray<RSoundTrack> streams);
 
 private:
     std::unordered_map<std::string, Ref<RSoundTrack>> stream_map;
@@ -43,8 +43,12 @@ public:
     String get_name() const;
     void set_name(const String &p_name);
 
+    Ref<AudioStream> get_stream() const;
+    void set_stream(Ref<AudioStream> p_stream);
+
 private:
     String name;
+    Ref<AudioStream> stream;
 
 protected:
     static void _bind_methods();
