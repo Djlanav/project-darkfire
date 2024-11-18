@@ -20,7 +20,9 @@ add_library(darkfire_module MODULE
         src/register_types.cpp
         src/register_types.h
         src/SFXManager.cpp
-        src/SFXManager.h)
+        src/SFXManager.h
+        src/Utilities.cpp
+        src/Utilities.h)
 
 # Link against the Godot C++ bindings and Godot engine
 target_link_libraries(darkfire_module godot-cpp)

@@ -153,6 +153,30 @@ src/SFXManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/darkfire_module.dir/build.make CMakeFiles/darkfire_module.dir/src/SFXManager.cpp.s
 .PHONY : src/SFXManager.cpp.s
 
+src/Utilities.o: src/Utilities.cpp.o
+.PHONY : src/Utilities.o
+
+# target to build an object file
+src/Utilities.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/darkfire_module.dir/build.make CMakeFiles/darkfire_module.dir/src/Utilities.cpp.o
+.PHONY : src/Utilities.cpp.o
+
+src/Utilities.i: src/Utilities.cpp.i
+.PHONY : src/Utilities.i
+
+# target to preprocess a source file
+src/Utilities.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/darkfire_module.dir/build.make CMakeFiles/darkfire_module.dir/src/Utilities.cpp.i
+.PHONY : src/Utilities.cpp.i
+
+src/Utilities.s: src/Utilities.cpp.s
+.PHONY : src/Utilities.s
+
+# target to generate assembly for a file
+src/Utilities.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/darkfire_module.dir/build.make CMakeFiles/darkfire_module.dir/src/Utilities.cpp.s
+.PHONY : src/Utilities.cpp.s
+
 src/register_types.o: src/register_types.cpp.o
 .PHONY : src/register_types.o
 
@@ -189,6 +213,9 @@ help:
 	@echo "... src/SFXManager.o"
 	@echo "... src/SFXManager.i"
 	@echo "... src/SFXManager.s"
+	@echo "... src/Utilities.o"
+	@echo "... src/Utilities.i"
+	@echo "... src/Utilities.s"
 	@echo "... src/register_types.o"
 	@echo "... src/register_types.i"
 	@echo "... src/register_types.s"

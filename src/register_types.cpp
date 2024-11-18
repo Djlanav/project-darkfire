@@ -17,7 +17,7 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
         return;
     }
 
-    GDREGISTER_CLASS(RSoundTrack)
+    GDREGISTER_CLASS(AudioTrack)
     GDREGISTER_CLASS(SFXManager)
 }
 

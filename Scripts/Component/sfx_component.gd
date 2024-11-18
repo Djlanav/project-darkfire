@@ -12,7 +12,7 @@ enum LoopingState {
 
 #region Exports
 @export var sound_tracks: Dictionary
-@export var tracks_array: Array[RSoundTrack]
+@export var tracks_array: Array[AudioTrack]
 
 @export_group("Looping Settings")
 @export var looping_stream: AudioStream

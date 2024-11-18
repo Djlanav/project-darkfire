@@ -1,7 +1,0 @@
-[gd_resource type="RSoundTrack" load_steps=2 format=3 uid="uid://n31enqcpt77m"]
-
-[ext_resource type="AudioStream" uid="uid://d2rbcekukg41q" path="res://FX/SFX/wind2.mp3" id="1_ph2m5"]
-
-[resource]
-name = "wind2"
-stream = ExtResource("1_ph2m5")
