@@ -46,7 +46,6 @@ enum LoopingState {
 var current_looping_state := LoopingState.STOP
 var bus_names: Array[String]
 var bus_effects: Dictionary
-@onready var sfx_manager: SFXManager = $SFXManager
 
 
 func play_random_ambience() -> void:
@@ -99,7 +98,6 @@ func _get_bus_effects(bus_name: String) -> Array:
 
 
 func _ready() -> void:
-	sfx_manager.get_streams_from_array(tracks_array)
 	init_streams()
 	add_to_lists()
 	_get_bus_names()

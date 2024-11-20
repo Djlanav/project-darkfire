@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/darkfire_module.dir/src/AudioTrack.cpp.o"
+  "CMakeFiles/darkfire_module.dir/src/AudioTrack.cpp.o.d"
   "CMakeFiles/darkfire_module.dir/src/SFXManager.cpp.o"
   "CMakeFiles/darkfire_module.dir/src/SFXManager.cpp.o.d"
   "CMakeFiles/darkfire_module.dir/src/Utilities.cpp.o"

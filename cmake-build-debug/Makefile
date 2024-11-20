@@ -129,6 +129,30 @@ darkfire_module/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/darkfire_module.dir/build.make CMakeFiles/darkfire_module.dir/build
 .PHONY : darkfire_module/fast
 
+src/AudioTrack.o: src/AudioTrack.cpp.o
+.PHONY : src/AudioTrack.o
+
+# target to build an object file
+src/AudioTrack.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/darkfire_module.dir/build.make CMakeFiles/darkfire_module.dir/src/AudioTrack.cpp.o
+.PHONY : src/AudioTrack.cpp.o
+
+src/AudioTrack.i: src/AudioTrack.cpp.i
+.PHONY : src/AudioTrack.i
+
+# target to preprocess a source file
+src/AudioTrack.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/darkfire_module.dir/build.make CMakeFiles/darkfire_module.dir/src/AudioTrack.cpp.i
+.PHONY : src/AudioTrack.cpp.i
+
+src/AudioTrack.s: src/AudioTrack.cpp.s
+.PHONY : src/AudioTrack.s
+
+# target to generate assembly for a file
+src/AudioTrack.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/darkfire_module.dir/build.make CMakeFiles/darkfire_module.dir/src/AudioTrack.cpp.s
+.PHONY : src/AudioTrack.cpp.s
+
 src/SFXManager.o: src/SFXManager.cpp.o
 .PHONY : src/SFXManager.o
 
@@ -210,6 +234,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... darkfire_module"
+	@echo "... src/AudioTrack.o"
+	@echo "... src/AudioTrack.i"
+	@echo "... src/AudioTrack.s"
 	@echo "... src/SFXManager.o"
 	@echo "... src/SFXManager.i"
 	@echo "... src/SFXManager.s"

@@ -22,7 +22,9 @@ add_library(darkfire_module MODULE
         src/SFXManager.cpp
         src/SFXManager.h
         src/Utilities.cpp
-        src/Utilities.h)
+        src/Utilities.h
+        src/AudioTrack.cpp
+        src/AudioTrack.h)
 
 # Link against the Godot C++ bindings and Godot engine
 target_link_libraries(darkfire_module godot-cpp)
