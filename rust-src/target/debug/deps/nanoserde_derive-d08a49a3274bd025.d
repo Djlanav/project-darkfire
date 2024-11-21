@@ -1,0 +1,10 @@
+/home/cmh/Documents/Godot Projects/fps-project/rust-src/target/debug/deps/libnanoserde_derive-d08a49a3274bd025.so: /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-derive-0.1.22/src/lib.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-derive-0.1.22/src/shared.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-derive-0.1.22/src/serde_bin.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-derive-0.1.22/src/serde_ron.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-derive-0.1.22/src/serde_json.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-derive-0.1.22/src/parse.rs
+
+/home/cmh/Documents/Godot Projects/fps-project/rust-src/target/debug/deps/nanoserde_derive-d08a49a3274bd025.d: /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-derive-0.1.22/src/lib.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-derive-0.1.22/src/shared.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-derive-0.1.22/src/serde_bin.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-derive-0.1.22/src/serde_ron.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-derive-0.1.22/src/serde_json.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-derive-0.1.22/src/parse.rs
+
+/home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-derive-0.1.22/src/lib.rs:
+/home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-derive-0.1.22/src/shared.rs:
+/home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-derive-0.1.22/src/serde_bin.rs:
+/home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-derive-0.1.22/src/serde_ron.rs:
+/home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-derive-0.1.22/src/serde_json.rs:
+/home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-derive-0.1.22/src/parse.rs:

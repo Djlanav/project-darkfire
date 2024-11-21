@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ch1o5wrd8ngpb"]
-
-[ext_resource type="Script" path="res://Scripts/Component/sfx_comp.gd" id="1_r5ivq"]
-
-[node name="SFXComp" type="SFXManager"]
-script = ExtResource("1_r5ivq")

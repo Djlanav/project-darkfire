@@ -1,11 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2mqdrvgix4wh"]
+[gd_scene load_steps=2 format=3 uid="uid://b2mqdrvgix4wh"]
 
 [ext_resource type="Script" path="res://Scripts/Component/sfx_component.gd" id="1_5p51w"]
-[ext_resource type="AudioTrack" uid="uid://cyg3q6m6o0qoj" path="res://Resources/AudioTracks/track_amb_wind1.tres" id="2_o8dbf"]
 
 [node name="SFXComponent" type="Node3D"]
 script = ExtResource("1_5p51w")
-tracks_array = Array[AudioTrack]([ExtResource("2_o8dbf")])
 
 [node name="LoopingSFX" type="AudioStreamPlayer3D" parent="."]
 bus = &"SFX"

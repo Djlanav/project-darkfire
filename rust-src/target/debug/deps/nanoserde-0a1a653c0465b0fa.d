@@ -1,0 +1,11 @@
+/home/cmh/Documents/Godot Projects/fps-project/rust-src/target/debug/deps/libnanoserde-0a1a653c0465b0fa.rmeta: /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-0.1.37/src/lib.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-0.1.37/src/serde_bin.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-0.1.37/src/serde_ron.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-0.1.37/src/serde_json.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-0.1.37/src/toml.rs
+
+/home/cmh/Documents/Godot Projects/fps-project/rust-src/target/debug/deps/libnanoserde-0a1a653c0465b0fa.rlib: /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-0.1.37/src/lib.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-0.1.37/src/serde_bin.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-0.1.37/src/serde_ron.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-0.1.37/src/serde_json.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-0.1.37/src/toml.rs
+
+/home/cmh/Documents/Godot Projects/fps-project/rust-src/target/debug/deps/nanoserde-0a1a653c0465b0fa.d: /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-0.1.37/src/lib.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-0.1.37/src/serde_bin.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-0.1.37/src/serde_ron.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-0.1.37/src/serde_json.rs /home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-0.1.37/src/toml.rs
+
+/home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-0.1.37/src/lib.rs:
+/home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-0.1.37/src/serde_bin.rs:
+/home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-0.1.37/src/serde_ron.rs:
+/home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-0.1.37/src/serde_json.rs:
+/home/cmh/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nanoserde-0.1.37/src/toml.rs:
