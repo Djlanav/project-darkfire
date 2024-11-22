@@ -1,1 +1,1 @@
-/home/cmh/Documents/Godot\ Projects/fps-project/rust-src/target/debug/librust_src.so: /home/cmh/Documents/Godot\ Projects/fps-project/rust-src/src/audio_handling.rs /home/cmh/Documents/Godot\ Projects/fps-project/rust-src/src/lib.rs
+/home/cmh/Documents/Godot\ Projects/fps-project/rust-src/target/debug/librust_src.so: /home/cmh/Documents/Godot\ Projects/fps-project/rust-src/src/audio_handling.rs /home/cmh/Documents/Godot\ Projects/fps-project/rust-src/src/lib.rs /home/cmh/Documents/Godot\ Projects/fps-project/rust-src/src/utils.rs

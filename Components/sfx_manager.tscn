@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bd4qgmln5hp64"]
+[gd_scene load_steps=3 format=3 uid="uid://bd4qgmln5hp64"]
 
 [ext_resource type="Script" path="res://Scripts/Component/sfx_manager.gd" id="1_t5cqk"]
+[ext_resource type="AudioTrack" uid="uid://lbjh0u4dgfoa" path="res://Resources/AudioTracks/track_amb_wind1.tres" id="2_4es3r"]
 
-[node name="SFXManager" type="SFXManager"]
+[node name="SFXComp" type="Node3D"]
 script = ExtResource("1_t5cqk")
+track_array = Array[AudioTrack]([ExtResource("2_4es3r")])
+
+[node name="SFXManager" type="SFXManager" parent="."]

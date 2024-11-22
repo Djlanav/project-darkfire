@@ -1,3 +1,7 @@
-[gd_resource type="AudioTrack" format=3 uid="uid://lbjh0u4dgfoa"]
+[gd_resource type="AudioTrack" load_steps=2 format=3 uid="uid://lbjh0u4dgfoa"]
+
+[ext_resource type="AudioStream" uid="uid://c42h04an0gtvu" path="res://FX/SFX/wind1.mp3" id="1_bqssr"]
 
 [resource]
+stream = ExtResource("1_bqssr")
+amplify = true

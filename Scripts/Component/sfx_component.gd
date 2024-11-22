@@ -158,4 +158,4 @@ func _on_ambience_finished() -> void:
 		ambience.stream = ambience_list.pick_random()
 		ambience_stream = ambience.stream
 		ambience.play()
-		
+	
