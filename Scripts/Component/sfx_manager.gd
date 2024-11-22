@@ -7,7 +7,7 @@ class_name SFXComp
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	sfx_manager.get_streams_from_array(track_array)
+	sfx_manager.get_tracks_from_array(track_array)
 	var track := sfx_manager.retrieve_audio_track("amb_wind1")
 	print(track.get_track_name())
 

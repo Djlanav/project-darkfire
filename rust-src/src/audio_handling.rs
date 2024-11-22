@@ -53,7 +53,7 @@ impl SFXManager {
     }
 
     #[func]
-    fn get_streams_from_array(&mut self, track_array: Array<Gd<AudioTrack>>) {
+    fn get_tracks_from_array(&mut self, track_array: Array<Gd<AudioTrack>>) {
         for mut track in track_array.iter_shared() {
             let mut res_path: String = track.get_path().into();
             let find_pos = res_path.find("_").unwrap();
