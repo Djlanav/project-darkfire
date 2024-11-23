@@ -69,6 +69,16 @@ popup/item_3/id = 3
 popup/item_4/text = "Exclusive Fullscreen"
 popup/item_4/id = 4
 
+[node name="VoxelGI" type="CheckButton" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 248.0
+offset_right = 348.0
+offset_bottom = 279.0
+button_pressed = true
+text = "Toggle VoxelGI (Global Illumination)"
+
 [connection signal="toggled" from="VsyncToggle" to="." method="_on_vsync_toggle_toggled"]
 [connection signal="item_selected" from="Anti-Aliasing/OptionButton" to="." method="_on_option_button_item_selected"]
 [connection signal="item_selected" from="WindowMode/WindowModeOption" to="." method="_on_window_mode_option_item_selected"]
+[connection signal="pressed" from="VoxelGI" to="." method="_on_voxel_gi_pressed"]

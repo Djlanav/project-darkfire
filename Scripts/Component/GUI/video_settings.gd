@@ -59,3 +59,7 @@ func _on_window_mode_option_item_selected(index: int) -> void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		4:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+
+
+func _on_voxel_gi_pressed() -> void:
+	SignalBus.voxelgi_toggled.emit($VoxelGI.button_pressed)

@@ -49,6 +49,9 @@ shadow_enabled = true
 spot_range = 13.6003
 spot_angle = 29.5533
 
+[node name="SFXComp" parent="." instance=ExtResource("3_1p5tr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.493473, 0.924224, -0.833967)
+
 [node name="HealthComponent" parent="." instance=ExtResource("4_t4iim")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.34407, 0.206489)
 max_health = 100
@@ -98,9 +101,6 @@ grow_horizontal = 0
 bbcode_enabled = true
 text = "[font_size=25]FPS:   [color=green]%d[/color]"
 script = ExtResource("10_jrv6f")
-
-[node name="SFXComp" parent="." instance=ExtResource("3_1p5tr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.493473, 0.924224, -0.833967)
 
 [connection signal="health_zero" from="HealthComponent" to="." method="_on_health_component_health_zero"]
 [connection signal="console_toggle" from="PlayerInputComponent" to="." method="_on_player_input_component_console_toggle"]

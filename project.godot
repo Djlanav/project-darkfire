@@ -17,12 +17,13 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 
 [audio]
 
-buses/default_bus_layout="res://custom_layout.tres"
+buses/default_bus_layout="res://audio_layout.tres"
 
 [autoload]
 
 SoundStateManager="*res://Scripts/Autoloads/SoundStateManager.gd"
 ConsoleDataManager="*res://addons/simply-console/singletons/console_data_manager.gd"
+SignalBus="*res://Scripts/Autoloads/signal_bus.gd"
 
 [editor_plugins]
 

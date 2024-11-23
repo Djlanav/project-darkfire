@@ -136,4 +136,5 @@ light_bake_mode = 1
 omni_range = 8.98725
 
 [node name="VoxelGI" type="VoxelGI" parent="."]
+process_mode = 3
 data = ExtResource("8_s6468")

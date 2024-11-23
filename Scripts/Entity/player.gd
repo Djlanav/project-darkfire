@@ -8,7 +8,6 @@ signal take_damage(damage: int)
 #region Components
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var input_component: PlayerInputComponent = $PlayerInputComponent
-#@onready var sfx_component: SFXComponent = $SFXComponent
 @onready var sfx_man: SFXComp = $SFXComp
 #endregion
 
@@ -37,6 +36,13 @@ var current_state: State
 var is_wasd: bool
 var held_object: RigidBody3D
 var last_held_position: Vector3 = Vector3.ZERO
+var current_map: Node
+
+
+func _ready() -> void:
+	current_map = get_parent()
+	
+	SignalBus.voxelgi_toggled.connect(_on_voxelgi_toggled)
 
 
 func _process(_delta: float) -> void:
@@ -44,27 +50,12 @@ func _process(_delta: float) -> void:
 		last_held_position = held_object.global_position
 		held_object.global_position = lerp(held_object.global_position, 
 				hold_point.global_position, 0.2)
-	
-	#match current_state:
-		#State.MOVING:
-			#sfx_component.set_sfx_state(sfx_component.LoopingState.PLAYING)
-		#
-		#State.IDLE:
-			#sfx_component.set_sfx_state(sfx_component.LoopingState.PAUSED)
-		#
-		#State.FALLING:
-			#sfx_component.set_sfx_state(sfx_component.LoopingState.PAUSED)
 
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
-		#current_state = State.FALLING
 		velocity += get_gravity() * delta
-	#elif is_on_floor() and is_wasd:
-		#current_state = State.MOVING
-	#else:
-		#current_state = State.IDLE
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -122,3 +113,11 @@ func _on_player_input_component_console_toggle() -> void:
 		console.show()
 	else:
 		console.hide()
+
+
+func _on_voxelgi_toggled(status: bool) -> void:
+	var voxel_gi: VoxelGI = current_map.get_node("VoxelGI") as VoxelGI
+	if status:
+		voxel_gi.show()
+	else:
+		voxel_gi.hide()
