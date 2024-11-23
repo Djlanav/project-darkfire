@@ -7,7 +7,7 @@ ceiling_db = -15.34
 
 [sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_8re43"]
 resource_name = "Amplify"
-volume_db = 14.0
+volume_db = 24.0
 
 [resource]
 bus/1/name = &"SFX"

@@ -8,7 +8,8 @@ signal take_damage(damage: int)
 #region Components
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var input_component: PlayerInputComponent = $PlayerInputComponent
-@onready var sfx_component: SFXComponent = $SFXComponent
+#@onready var sfx_component: SFXComponent = $SFXComponent
+@onready var sfx_man: SFXComp = $SFXComp
 #endregion
 
 
@@ -44,26 +45,26 @@ func _process(_delta: float) -> void:
 		held_object.global_position = lerp(held_object.global_position, 
 				hold_point.global_position, 0.2)
 	
-	match current_state:
-		State.MOVING:
-			sfx_component.set_sfx_state(sfx_component.LoopingState.PLAYING)
-		
-		State.IDLE:
-			sfx_component.set_sfx_state(sfx_component.LoopingState.PAUSED)
-		
-		State.FALLING:
-			sfx_component.set_sfx_state(sfx_component.LoopingState.PAUSED)
+	#match current_state:
+		#State.MOVING:
+			#sfx_component.set_sfx_state(sfx_component.LoopingState.PLAYING)
+		#
+		#State.IDLE:
+			#sfx_component.set_sfx_state(sfx_component.LoopingState.PAUSED)
+		#
+		#State.FALLING:
+			#sfx_component.set_sfx_state(sfx_component.LoopingState.PAUSED)
 
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
-		current_state = State.FALLING
+		#current_state = State.FALLING
 		velocity += get_gravity() * delta
-	elif is_on_floor() and is_wasd:
-		current_state = State.MOVING
-	else:
-		current_state = State.IDLE
+	#elif is_on_floor() and is_wasd:
+		#current_state = State.MOVING
+	#else:
+		#current_state = State.IDLE
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():

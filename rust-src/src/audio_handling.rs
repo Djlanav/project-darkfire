@@ -1,6 +1,8 @@
 use std::collections::HashMap;
 use godot::classes::{AudioServer, AudioStream};
+use godot::obj::NewGd;
 use godot::prelude::*;
+use rand::Rng;
 use crate::utils;
 
 #[derive(GodotClass)]
@@ -46,10 +48,27 @@ impl SFXManager {
     fn retrieve_audio_track(&self, track_name: String) -> Gd<AudioTrack> {
         let track = match self.track_mapping.get(&track_name) {
             Some(track) => track,
-            None => panic!("Could not find track {}", track_name)
+            None => panic!("Could not find audio track {}", track_name)
         };
 
         track.clone()
+    }
+
+    #[func]
+    fn retrieve_random_ambience(&self) -> Option<Gd<AudioTrack>> {
+        let rand_num = rand::thread_rng().gen_range(0..self.track_mapping.len());
+        let mut index = 0;
+
+        for key in self.track_mapping.keys() {
+            if index == rand_num {
+                let track = self.track_mapping.get(key).unwrap();
+                return Some(track.clone());
+            }
+
+            index += 1;
+        }
+
+        None
     }
 
     #[func]
