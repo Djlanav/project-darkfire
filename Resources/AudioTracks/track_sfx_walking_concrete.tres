@@ -1,0 +1,6 @@
+[gd_resource type="AudioTrack" load_steps=2 format=3 uid="uid://dmuc4ahdjfk08"]
+
+[ext_resource type="AudioStream" uid="uid://cl5ca1ttq2x5v" path="res://FX/SFX/concrete-footsteps-6752.mp3" id="1_3qb7p"]
+
+[resource]
+stream = ExtResource("1_3qb7p")

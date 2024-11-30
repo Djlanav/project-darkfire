@@ -23,19 +23,18 @@ func play_random_ambience() -> void:
 	var track := sfx_manager.retrieve_random_ambience()
 	print("SFX ready")
 	
-	if is_instance_valid(track) and track.get_amplify():
-		ambience_player.set_stream(track.get_stream())
-		ambience_player.set_bus(AudioServer.get_bus_name(5))
+	if track.get_amplify() or track.get_reverb() or track.get_hard_limit():
+		play_ambience_player(track, AudioServer.get_bus_index("Ambience Effects"))
+		
+
+
+func play_ambience_player(audio_track: AudioTrack, audio_bus: int) -> void:
+		ambience_player.set_stream(audio_track.get_stream())
+		ambience_player.set_bus(AudioServer.get_bus_name(audio_bus))
 		ambience_player.play()
 		
-		var my_str = "Playing track: {0} on bus {1}"
-		print(my_str.format([track.get_track_name(), ambience_player.get_bus()]))
-	elif is_instance_valid(track):
-		ambience_player.set_stream(track.get_stream())
-		ambience_player.play()
-		
-		var my_str = "Playing track: {0} on bus {1}"
-		print(my_str.format([track.get_track_name(), ambience_player.get_bus()]))
+		var playing_string = "Playing track: {0} on bus {1}"
+		print(playing_string.format([audio_track.get_track_name(), ambience_player.get_bus()]))
 
 
 func _on_ambience_finished() -> void:

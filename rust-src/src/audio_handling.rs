@@ -1,12 +1,24 @@
-use std::collections::HashMap;
-use godot::classes::{AudioServer, AudioStream};
+use crate::utils;
+use godot::classes::AudioStream;
 use godot::prelude::*;
 use rand::Rng;
-use crate::utils;
+use std::collections::HashMap;
+
+pub enum AudioEffect {
+    Amplify,
+    Reverb,
+    HardLimit
+}
+
+impl Default for AudioEffect {
+    fn default() -> Self {
+        AudioEffect::Amplify
+    }
+}
 
 #[derive(GodotClass)]
 #[class(init, base=Resource)]
-struct AudioTrack {
+pub struct AudioTrack {
     #[var]
     track_name: GString,
     #[export]
@@ -17,13 +29,13 @@ struct AudioTrack {
     reverb: bool,
     #[export]
     hard_limit: bool,
+    audio_effect: AudioEffect,
     base: Base<Resource>
 }
 
 #[derive(GodotClass)]
 #[class(base=Node3D)]
-struct SFXManager {
-    bus_mapping: HashMap<GString, i64>,
+pub struct SFXManager {
     track_mapping: HashMap<String, Gd<AudioTrack>>,
     base: Base<Node3D>
 }
@@ -33,7 +45,6 @@ impl INode3D for SFXManager {
     fn init(base: Base<Node3D>) -> Self {
         let sfx_manager = SFXManager {
             track_mapping: HashMap::new(),
-            bus_mapping: HashMap::new(),
             base
         };
 
@@ -85,19 +96,6 @@ impl SFXManager {
             }
 
             self.track_mapping.insert(res_path, track.clone());
-        }
-    }
-
-    #[func]
-    fn get_bus_mapping(&mut self) {
-        let audio_server = AudioServer::singleton();
-        let bus_count = audio_server.get_bus_count();
-
-        for  bus in 0..bus_count {
-            let bus_name = audio_server.get_bus_name(bus);
-            let bus_index = audio_server.get_bus_index(bus_name.arg()) as i64;
-
-            self.bus_mapping.insert(bus_name, bus_index);
         }
     }
 

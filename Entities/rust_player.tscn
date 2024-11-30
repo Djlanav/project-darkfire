@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://dc6g6626uqw4g"]
+
+[ext_resource type="PackedScene" uid="uid://cmrfdlp25wcby" path="res://addons/simply-console/scenes/console-window/console_window.tscn" id="1_eshje"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3jpqd"]
+size = Vector3(1, 1.58453, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7pdmk"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_woc50"]
+
+[sub_resource type="Sky" id="Sky_awhu0"]
+sky_material = SubResource("ProceduralSkyMaterial_woc50")
+
+[sub_resource type="Environment" id="Environment_af4yk"]
+background_mode = 2
+sky = SubResource("Sky_awhu0")
+
+[sub_resource type="BoxMesh" id="BoxMesh_8emqj"]
+
+[node name="RustPlayer" type="RustPlayer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.933648, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.126801, 0)
+shape = SubResource("BoxShape3D_3jpqd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_7pdmk")
+
+[node name="PlayerCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.651737, -0.445547)
+
+[node name="PickUpRange" type="RayCast3D" parent="."]
+
+[node name="HoldPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.496593, -1.77096)
+
+[node name="Flashlight" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00381, -0.255437)
+
+[node name="RustHealthComponent" type="RustHealthComponent" parent="."]
+max_health = 100
+
+[node name="RustPlayerInputComponent" type="RustPlayerInputComponent" parent="."]
+
+[node name="SFXComp" type="SFXManager" parent="."]
+
+[node name="ConsoleWindow" parent="." instance=ExtResource("1_eshje")]
+visible = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_af4yk")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.40449)
+mesh = SubResource("BoxMesh_8emqj")
