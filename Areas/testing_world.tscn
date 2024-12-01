@@ -28,7 +28,7 @@ script = ExtResource("1_vr4wh")
 collision_layer = 7
 
 [node name="Player" parent="." instance=ExtResource("2_wvybn")]
-transform = Transform3D(0.463866, 0, 0, 0, 0.463866, 0, 0, 0, 0.463866, -0.163668, 1.1634, 0.110214)
+transform = Transform3D(0.463866, 0, 0, 0, 0.463866, 0, 0, 0, 0.463866, -0.163668, 3.86206, 0.110214)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_w8bdj")

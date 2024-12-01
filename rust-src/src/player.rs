@@ -2,6 +2,7 @@ use std::ops::{Add, Deref};
 use crate::{components::HealthComponent, components::PlayerInputComponent, audio_handling::SFXManager,
             callable_method};
 use godot::classes::{CharacterBody3D, ICharacterBody3D, InputMap, RayCast3D, RigidBody3D, SpotLight3D, VoxelGi, Window};
+use godot::global::move_toward;
 use godot::prelude::*;
 // pub enum PlayerState {
 //     IDLE,
@@ -97,12 +98,12 @@ impl ICharacterBody3D for RustPlayer {
     }
 
     fn physics_process(&mut self, delta: f64) {
-        if !self.base().is_on_floor() {
-            let current_velocity = self.base().get_velocity();
-            let new_velocity = current_velocity.add(self.base()
-                .get_gravity() * Vector3::new(delta as real, delta as real , delta as real));
+        let mut current_velocity = self.base().get_velocity();
 
-            self.base_mut().set_velocity(new_velocity);
+        if !self.base().is_on_floor() {
+            current_velocity += self.base().get_gravity() * Vector3::splat(delta as real);
+
+            self.base_mut().set_velocity(current_velocity);
         }
 
         if self.input_singleton.is_action_just_pressed("jump") && self.base().is_on_floor() {
@@ -117,29 +118,33 @@ impl ICharacterBody3D for RustPlayer {
             "forward",
             "backward");
 
-        if input_dir == Vector2::ZERO {
-            panic!("input_dir cannot be zero!");
-        }
+        if input_dir != Vector2::ZERO {
+            let direction = (transform_basis * Vector3::new(
+                input_dir.x,
+                0.0,
+                input_dir.y)).normalized();
 
-        let direction = (transform_basis * Vector3::new(
-            input_dir.x,
-            0.0,
-            input_dir.y)).normalized();
-
-        if direction != Vector3::ZERO {
-            let current_velocity = self.base().get_velocity();
             let new_x = direction.x * self.speed as real;
             let new_z = direction.z * self.speed as real;
             self.base_mut().set_velocity(Vector3::new(
-               new_x,
-               current_velocity.y,
-               new_z,
+                new_x,
+                current_velocity.y,
+                new_z,
             ));
 
             self.set_is_wasd(true);
         } else {
             self.set_is_wasd(false);
+
+            let new_x = move_toward(current_velocity.x as f64, 0.0, self.speed as f64);
+            let new_y = move_toward(current_velocity.y as f64, 0.0, self.speed as f64);
+
+            self.base_mut().set_velocity(Vector3::new(new_x as real,
+                                                      new_y as real,
+                                                      current_velocity.z));
         }
+
+        self.base_mut().move_and_slide();
     }
 
     fn ready(&mut self) {
