@@ -32,11 +32,11 @@ pub struct RustPlayer {
     console: OnReady<Gd<Window>>,
     // @onready end
 
-    #[var]
+    #[export]
     speed: i64,
-    #[var]
+    #[export]
     jump_velocity: f64,
-    #[var]
+    #[export]
     inertia: f64,
     #[var]
     is_wasd: bool,
@@ -67,7 +67,7 @@ impl ICharacterBody3D for RustPlayer {
             console: OnReady::node("ConsoleWindow"),
 
             speed: 5,
-            jump_velocity: 4.5,
+            jump_velocity: 7.5,
             inertia: 80.0,
             is_wasd: false,
             held_object: None,
@@ -100,16 +100,6 @@ impl ICharacterBody3D for RustPlayer {
     fn physics_process(&mut self, delta: f64) {
         let mut current_velocity = self.base().get_velocity();
 
-        if !self.base().is_on_floor() {
-            current_velocity += self.base().get_gravity() * Vector3::splat(delta as real);
-
-            self.base_mut().set_velocity(current_velocity);
-        }
-
-        if self.input_singleton.is_action_just_pressed("jump") && self.base().is_on_floor() {
-            self.base_mut().get_velocity().y = self.jump_velocity as real;
-        }
-
         // Movement
         let transform_basis = self.base().get_transform().basis;
         let input_dir = self.input_singleton.get_vector(
@@ -118,7 +108,8 @@ impl ICharacterBody3D for RustPlayer {
             "forward",
             "backward");
 
-        if input_dir != Vector2::ZERO {
+        if !input_dir.is_zero_approx() {
+            godot_print!("Moving");
             let direction = (transform_basis * Vector3::new(
                 input_dir.x,
                 0.0,
@@ -137,10 +128,25 @@ impl ICharacterBody3D for RustPlayer {
             self.set_is_wasd(false);
 
             let new_x = move_toward(current_velocity.x as f64, 0.0, self.speed as f64);
-            let new_y = move_toward(current_velocity.y as f64, 0.0, self.speed as f64);
+            let new_z = move_toward(current_velocity.z as f64, 0.0, self.speed as f64);
 
             self.base_mut().set_velocity(Vector3::new(new_x as real,
-                                                      new_y as real,
+                                                      current_velocity.y,
+                                                      new_z as real));
+        }
+
+        // TODO: FIX PLAYER NOT BEING ABLE TO MOVE WHILE FALLING
+        if !self.base().is_on_floor() {
+            current_velocity += self.base().get_gravity() * Vector3::splat(delta as real);
+            self.base_mut().set_velocity(current_velocity);
+
+           // godot_print!("Velocity while falling: {}", self.base().get_velocity());
+        }
+
+        if self.input_singleton.is_action_just_pressed("jump") && self.base().is_on_floor() {
+            let get_jump_velocity = self.get_jump_velocity();
+            self.base_mut().set_velocity(Vector3::new(current_velocity.x,
+                                                      get_jump_velocity as real,
                                                       current_velocity.z));
         }
 

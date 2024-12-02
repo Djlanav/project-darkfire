@@ -18,7 +18,7 @@ shape = SubResource("BoxShape3D_3jpqd")
 mesh = SubResource("CapsuleMesh_7pdmk")
 
 [node name="PlayerCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.998077, 0.0619893, 0, -0.0619893, 0.998077, 0, 0.41168, 4.09929)
+transform = Transform3D(1, 0, 0, 0, 0.940359, 0.340183, 0, -0.340183, 0.940359, 0, 1.61174, 4.09929)
 
 [node name="PickUpRange" type="RayCast3D" parent="."]
 
