@@ -108,8 +108,12 @@ impl ICharacterBody3D for RustPlayer {
             "forward",
             "backward");
 
+        if !self.base().is_on_floor() {
+            current_velocity += self.base().get_gravity() * Vector3::splat(delta as real);
+            self.base_mut().set_velocity(current_velocity);
+        }
+
         if !input_dir.is_zero_approx() {
-            godot_print!("Moving");
             let direction = (transform_basis * Vector3::new(
                 input_dir.x,
                 0.0,
@@ -133,14 +137,6 @@ impl ICharacterBody3D for RustPlayer {
             self.base_mut().set_velocity(Vector3::new(new_x as real,
                                                       current_velocity.y,
                                                       new_z as real));
-        }
-
-        // TODO: FIX PLAYER NOT BEING ABLE TO MOVE WHILE FALLING
-        if !self.base().is_on_floor() {
-            current_velocity += self.base().get_gravity() * Vector3::splat(delta as real);
-            self.base_mut().set_velocity(current_velocity);
-
-           // godot_print!("Velocity while falling: {}", self.base().get_velocity());
         }
 
         if self.input_singleton.is_action_just_pressed("jump") && self.base().is_on_floor() {
