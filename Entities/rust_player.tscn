@@ -17,9 +17,6 @@ shape = SubResource("BoxShape3D_3jpqd")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_7pdmk")
 
-[node name="PlayerCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.940359, 0.340183, 0, -0.340183, 0.940359, 0, 1.61174, 4.09929)
-
 [node name="PickUpRange" type="RayCast3D" parent="."]
 
 [node name="HoldPoint" type="Node3D" parent="."]
@@ -27,6 +24,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.496593, -1.77096)
 
 [node name="Flashlight" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00381, -0.255437)
+
+[node name="PlayerCamera" type="FirstPersonCamera" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.606264, -0.536221)
 
 [node name="RustHealthComponent" type="RustHealthComponent" parent="."]
 max_health = 100

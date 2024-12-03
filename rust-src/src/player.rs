@@ -1,9 +1,11 @@
 use std::ops::{Add, Deref};
 use crate::{components::HealthComponent, components::PlayerInputComponent, audio_handling::SFXManager,
             callable_method};
-use godot::classes::{CharacterBody3D, ICharacterBody3D, InputMap, RayCast3D, RigidBody3D, SpotLight3D, VoxelGi, Window};
+use godot::classes::{CharacterBody3D, ICharacterBody3D, InputMap, RayCast3D, RigidBody3D,
+                     SpotLight3D, VoxelGi, Window};
 use godot::global::move_toward;
 use godot::prelude::*;
+use crate::components::FirstPersonCamera;
 // pub enum PlayerState {
 //     IDLE,
 //     MOVING,
@@ -22,7 +24,7 @@ pub struct RustPlayer {
     base: Base<CharacterBody3D>,
 
     // @onready vars
-    player_camera: OnReady<Gd<Camera3D>>,
+    player_camera: OnReady<Gd<FirstPersonCamera>>,
     health_component: OnReady<Gd<HealthComponent>>,
     input_component: OnReady<Gd<PlayerInputComponent>>,
     sfx_man: OnReady<Gd<SFXManager>>,
