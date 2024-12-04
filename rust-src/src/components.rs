@@ -1,9 +1,13 @@
+use std::thread::JoinHandle;
+use crossbeam::channel::unbounded;
 use crate::player::RustPlayer;
-use godot::classes::{INode3D, InputEvent, InputEventMouseMotion, Node3D};
+use godot::classes::{INode3D, InputEvent, InputEventMouseMotion, Node3D, Time, Viewport, ViewportTexture};
 use godot::classes::input::MouseMode;
 use godot::global::deg_to_rad;
+use godot::meta::ParamType;
 use godot::obj::{Base, WithBaseField};
 use godot::prelude::*;
+use crate::callable_method;
 
 #[derive(GodotClass)]
 #[class(init, rename=RustHealthComponent, base=Node3D)]
@@ -42,9 +46,10 @@ impl HealthComponent {
 }
 
 #[derive(GodotClass)]
-#[class(init, rename=RustPlayerInputComponent, base=Node3D)]
+#[class(rename=RustPlayerInputComponent, base=Node3D)]
 pub struct PlayerInputComponent {
     input: Gd<Input>,
+    threads: Vec<JoinHandle<()>>,
 
     #[var]
     is_mouse_captured: bool,
@@ -55,10 +60,74 @@ pub struct PlayerInputComponent {
 
 #[godot_api]
 impl INode3D for PlayerInputComponent {
+    fn init(base: Base<Node3D>) -> Self {
+        Self {
+            input: Input::singleton(),
+            threads: Vec::new(),
+            is_mouse_captured: false,
+            is_moving: false,
+            base
+        }
+    }
+
+    fn process(&mut self, delta: f64) {
+        if self.input.is_action_just_pressed("take_screenshot") {
+            self.base_mut().call_deferred("take_screenshot", &[]);
+
+        } else if self.input.is_action_just_pressed("debug quit") {
+            self.on_exiting_tree();
+            self.base().get_tree().unwrap().quit();
+        }
+    }
+
     fn ready(&mut self) {
-        self.input = Input::singleton();
         self.input.set_mouse_mode(MouseMode::CAPTURED);
         self.set_is_mouse_captured(true);
+
+        let self_gd = self.to_gd();
+        self.base_mut().connect(
+            "tree_exiting",
+            &callable_method!(&self_gd, "on_exiting_tree"));
+    }
+}
+
+#[godot_api]
+impl PlayerInputComponent {
+    #[func]
+    fn on_exiting_tree(&mut self) {
+        godot_print!("Joining {} threads...", self.threads.len());
+
+        for thread in self.threads.drain(..) {
+            if thread.is_finished() {
+                match thread.join() {
+                    Ok(_) => godot_print!("Successfully joined thread"),
+                    Err(e) => godot_error!("Error joining thread"),
+                }
+            }
+        }
+    }
+
+    #[func]
+    fn take_screenshot(&mut self) {
+        let viewport_id = self
+            .base()
+            .get_viewport()
+            .expect("Failed to get viewport")
+            .get_texture().unwrap()
+            .instance_id();
+
+        let thread_handle = std::thread::spawn(move || {
+            let viewport_image: Gd<ViewportTexture> = Gd::from_instance_id(viewport_id);
+            let time = Time::singleton().get_datetime_string_from_system();
+            let path = format!("user://screenshot_{}", time);
+
+            viewport_image
+                .get_image()
+                .unwrap()
+                .save_png(GString::from(path).owned_to_arg());
+        });
+
+        self.threads.push(thread_handle);
     }
 }
 

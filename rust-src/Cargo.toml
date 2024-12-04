@@ -8,5 +8,6 @@ crate-type = ["cdylib"]
 
 [dependencies]
 async-std = "1.13.0"
+crossbeam = "0.8.4"
 godot = { version = "0.2.0", features = ["experimental-threads"] }
 rand = "0.8.5"
