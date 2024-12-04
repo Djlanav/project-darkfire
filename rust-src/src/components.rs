@@ -9,6 +9,8 @@ use godot::obj::{Base, WithBaseField};
 use godot::prelude::*;
 use crate::callable_method;
 
+const MAX_THREADS: u32 = 5;
+
 #[derive(GodotClass)]
 #[class(init, rename=RustHealthComponent, base=Node3D)]
 pub struct HealthComponent {
@@ -93,8 +95,8 @@ impl INode3D for PlayerInputComponent {
 
 #[godot_api]
 impl PlayerInputComponent {
-    #[func]
-    fn on_exiting_tree(&mut self) {
+    #[inline]
+    fn join_threads(&mut self) {
         godot_print!("Joining {} threads...", self.threads.len());
 
         for thread in self.threads.drain(..) {
@@ -105,6 +107,11 @@ impl PlayerInputComponent {
                 }
             }
         }
+    }
+
+    #[func]
+    fn on_exiting_tree(&mut self) {
+        self.join_threads();
     }
 
     #[func]
@@ -127,7 +134,12 @@ impl PlayerInputComponent {
                 .save_png(GString::from(path).owned_to_arg());
         });
 
-        self.threads.push(thread_handle);
+
+        if self.threads.len() > MAX_THREADS as usize {
+            self.join_threads();
+        } else {
+            self.threads.push(thread_handle);
+        }
     }
 }
 

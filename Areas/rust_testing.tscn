@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8c347u3mx4nw"]
+[gd_scene load_steps=8 format=3 uid="uid://c8c347u3mx4nw"]
 
 [ext_resource type="PackedScene" uid="uid://dc6g6626uqw4g" path="res://Entities/rust_player.tscn" id="1_wtpi8"]
 
@@ -15,6 +15,8 @@ sky_material = SubResource("ProceduralSkyMaterial_prey2")
 [sub_resource type="Environment" id="Environment_58xua"]
 background_mode = 2
 sky = SubResource("Sky_hgwfw")
+
+[sub_resource type="BoxMesh" id="BoxMesh_tjdw5"]
 
 [node name="RustTesting" type="Node3D"]
 
@@ -37,3 +39,7 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_58xua")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.97129, -1.47876)
+mesh = SubResource("BoxMesh_tjdw5")
