@@ -80,6 +80,8 @@ impl INode3D for PlayerInputComponent {
             self.base().get_tree().unwrap().quit();
         } else if self.input.is_action_just_pressed("pause") {
             self.input.set_mouse_mode(MouseMode::VISIBLE);
+        } else if self.input.is_action_just_pressed("flashlight") {
+            self.base_mut().emit_signal("flashlight", &[]);
         }
     }
 
@@ -185,7 +187,6 @@ impl ICamera3D for FirstPersonCamera {
 
     fn unhandled_input(&mut self, event: Gd<InputEvent>) {
         if let Ok(mouse_motion) = event.try_cast::<InputEventMouseMotion>() {
-            let mut current_rotation = self.base().get_rotation();
             let sensitivity = self.camera_sensitivity;
             let player = self.player.as_mut().unwrap();
 
@@ -199,13 +200,14 @@ impl ICamera3D for FirstPersonCamera {
                     deg_to_rad(-mouse_motion.get_relative().y as f64)
                         * sensitivity) as f32);
 
-            // TODO: Fix camera rotation not being clamped at runtime
+            let mut current_rotation = self.base().get_rotation();
             current_rotation.x = clampf(
                 current_rotation.x as f64,
-                -deg_to_rad(90.0),
-                deg_to_rad(90.0)) as f32;
+                deg_to_rad(-90.0),
+                deg_to_rad(90.0)
+            ) as f32;
 
-            self.base_mut().get_rotation().x = current_rotation.x as f32;
+            self.base_mut().set_rotation(current_rotation);
         }
     }
 }

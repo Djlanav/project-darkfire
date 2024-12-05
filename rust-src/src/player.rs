@@ -2,6 +2,7 @@ use std::ops::{Add, Deref};
 use crate::{components::HealthComponent, components::PlayerInputComponent, audio_handling::SFXManager,
             callable_method};
 use godot::classes::{CharacterBody3D, ICharacterBody3D, InputMap, RayCast3D, RigidBody2D, RigidBody3D, SpotLight3D, VoxelGi, Window};
+use godot::classes::light_3d::Param;
 use godot::global::move_toward;
 use godot::prelude::*;
 use crate::components::FirstPersonCamera;
@@ -220,6 +221,16 @@ impl RustPlayer {
             voxel_gi.show();
         } else {
             voxel_gi.hide();
+        }
+    }
+
+    #[func]
+    pub fn on_flashlight_toggled(&mut self) {
+        let light_energy = self.flashlight.get_param(Param::ENERGY);
+        if light_energy >= 1.0 {
+            self.flashlight.set_param(Param::ENERGY, 0.0);
+        } else {
+            self.flashlight.set_param(Param::ENERGY, 2.3);
         }
     }
 
