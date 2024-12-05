@@ -11,6 +11,8 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
+		var current_rotation = get_rotation()
+		print(current_rotation)
 		parent_player.rotate_y(deg_to_rad(-event.relative.x) * camera_sensitivity)
 		
 		rotate_x(deg_to_rad(-event.relative.y) * camera_sensitivity)

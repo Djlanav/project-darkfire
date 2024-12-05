@@ -1,9 +1,8 @@
 use std::thread::JoinHandle;
-use crossbeam::channel::unbounded;
 use crate::player::RustPlayer;
 use godot::classes::{INode3D, InputEvent, InputEventMouseMotion, Node3D, Time, Viewport, ViewportTexture};
 use godot::classes::input::MouseMode;
-use godot::global::deg_to_rad;
+use godot::global::{clamp, clampf, deg_to_rad};
 use godot::meta::ParamType;
 use godot::obj::{Base, WithBaseField};
 use godot::prelude::*;
@@ -23,7 +22,7 @@ pub struct HealthComponent {
 
 #[godot_api]
 impl INode3D for HealthComponent {
-    fn process(&mut self, delta: f64) {
+    fn process(&mut self, _delta: f64) {
         if self.health <= 0 {
             self.base_mut().emit_signal("health_zero", &[]);
         }
@@ -72,13 +71,15 @@ impl INode3D for PlayerInputComponent {
         }
     }
 
-    fn process(&mut self, delta: f64) {
+    fn process(&mut self, _delta: f64) {
         if self.input.is_action_just_pressed("take_screenshot") {
             self.base_mut().call_deferred("take_screenshot", &[]);
 
         } else if self.input.is_action_just_pressed("debug quit") {
             self.on_exiting_tree();
             self.base().get_tree().unwrap().quit();
+        } else if self.input.is_action_just_pressed("pause") {
+            self.input.set_mouse_mode(MouseMode::VISIBLE);
         }
     }
 
@@ -95,18 +96,37 @@ impl INode3D for PlayerInputComponent {
 
 #[godot_api]
 impl PlayerInputComponent {
+    // Signals
+    #[signal]
+    fn pick_up();
+
+    #[signal]
+    fn toggle_flashlight();
+
+    #[signal]
+    fn console_toggle();
+
+    #[signal]
+    fn paused();
+
     #[inline]
     fn join_threads(&mut self) {
+        if self.threads.is_empty() {
+            return;
+        }
+
         godot_print!("Joining {} threads...", self.threads.len());
 
         for thread in self.threads.drain(..) {
             if thread.is_finished() {
                 match thread.join() {
                     Ok(_) => godot_print!("Successfully joined thread"),
-                    Err(e) => godot_error!("Error joining thread"),
+                    Err(_) => godot_error!("Error joining thread"),
                 }
             }
         }
+
+        self.threads.clear();
     }
 
     #[func]
@@ -165,11 +185,27 @@ impl ICamera3D for FirstPersonCamera {
 
     fn unhandled_input(&mut self, event: Gd<InputEvent>) {
         if let Ok(mouse_motion) = event.try_cast::<InputEventMouseMotion>() {
+            let mut current_rotation = self.base().get_rotation();
+            let sensitivity = self.camera_sensitivity;
             let player = self.player.as_mut().unwrap();
+
             player
                 .rotate_y((
                     deg_to_rad(-mouse_motion.get_relative().x as f64)
-                        * self.camera_sensitivity) as f32)
+                        * sensitivity) as f32);
+
+            self.base_mut()
+                .rotate_x((
+                    deg_to_rad(-mouse_motion.get_relative().y as f64)
+                        * sensitivity) as f32);
+
+            // TODO: Fix camera rotation not being clamped at runtime
+            current_rotation.x = clampf(
+                current_rotation.x as f64,
+                -deg_to_rad(90.0),
+                deg_to_rad(90.0)) as f32;
+
+            self.base_mut().get_rotation().x = current_rotation.x as f32;
         }
     }
 }
