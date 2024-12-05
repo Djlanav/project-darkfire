@@ -1,8 +1,7 @@
 use std::ops::{Add, Deref};
 use crate::{components::HealthComponent, components::PlayerInputComponent, audio_handling::SFXManager,
             callable_method};
-use godot::classes::{CharacterBody3D, ICharacterBody3D, InputMap, RayCast3D, RigidBody3D,
-                     SpotLight3D, VoxelGi, Window};
+use godot::classes::{CharacterBody3D, ICharacterBody3D, InputMap, RayCast3D, RigidBody2D, RigidBody3D, SpotLight3D, VoxelGi, Window};
 use godot::global::move_toward;
 use godot::prelude::*;
 use crate::components::FirstPersonCamera;
@@ -149,6 +148,26 @@ impl ICharacterBody3D for RustPlayer {
         }
 
         self.base_mut().move_and_slide();
+
+        let collision_count = self.base().get_slide_collision_count();
+        for index in 0..collision_count {
+            let collision = self.base_mut().get_slide_collision(index);
+            match collision {
+                Some(kinematic_collision) => {
+                    match kinematic_collision.get_collider() {
+                        Some(collider) => {
+                            if let Ok(mut body) = collider.try_cast::<RigidBody3D>() {
+                                body.apply_central_impulse(
+                                    -kinematic_collision.get_normal()
+                                        * Vector3::splat(self.inertia as real));
+                            }
+                        }
+                        None => continue
+                    }
+                },
+                None => continue
+            }
+        }
     }
 
     fn ready(&mut self) {

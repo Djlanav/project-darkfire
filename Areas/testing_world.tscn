@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://5qjdsmxr7sj8" path="res://Objects/World/prototype_ground.tscn" id="1_g0g4q"]
 [ext_resource type="Script" path="res://Scripts/light_test_script.gd" id="1_vr4wh"]
-[ext_resource type="PackedScene" uid="uid://c132wqyjajus" path="res://Entities/player.tscn" id="2_wvybn"]
 [ext_resource type="Texture2D" uid="uid://cp53xw8lnyfh1" path="res://Textures/HDR Skyboxes/klippad_dawn_1_2k.hdr" id="3_3hjnk"]
 [ext_resource type="PackedScene" uid="uid://dn4pis21idnm3" path="res://Objects/World/prototype_rigibody.tscn" id="3_qj456"]
 [ext_resource type="PackedScene" uid="uid://be1noq551kuf5" path="res://Objects/prototype_wall_1.tscn" id="4_yywp0"]
 [ext_resource type="PackedScene" uid="uid://cvwb0xe3no0k5" path="res://Objects/World/prototype_sphere.tscn" id="6_6n747"]
+[ext_resource type="PackedScene" uid="uid://dc6g6626uqw4g" path="res://Entities/rust_player.tscn" id="8_06fkl"]
 [ext_resource type="VoxelGIData" uid="uid://c7g6m2bydvbki" path="res://Data/VoxelGI/Testing World/tw_vxgi_data.res" id="8_s6468"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jb001"]
@@ -27,9 +27,6 @@ script = ExtResource("1_vr4wh")
 [node name="PrototypeGround" parent="." instance=ExtResource("1_g0g4q")]
 collision_layer = 7
 
-[node name="Player" parent="." instance=ExtResource("2_wvybn")]
-transform = Transform3D(0.463866, 0, 0, 0, 0.463866, 0, 0, 0, 0.463866, -0.163668, 3.86206, 0.110214)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_w8bdj")
 
@@ -41,6 +38,9 @@ light_bake_mode = 1
 shadow_enabled = true
 shadow_opacity = 0.87
 directional_shadow_split_2 = 0.523
+
+[node name="RustPlayer" parent="." instance=ExtResource("8_06fkl")]
+transform = Transform3D(0.463295, 0, 0, 0, 0.463295, 0, 0, 0, 0.463295, -0.582653, 1.08107, 0.743713)
 
 [node name="Lights" type="Node3D" parent="."]
 transform = Transform3D(0.0219719, 0, 0.999759, 0, 1, 0, -0.999759, 0, 0.0219719, 0, 0, -1.37753)
