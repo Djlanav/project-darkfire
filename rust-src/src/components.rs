@@ -81,7 +81,7 @@ impl INode3D for PlayerInputComponent {
         } else if self.input.is_action_just_pressed("pause") {
             self.input.set_mouse_mode(MouseMode::VISIBLE);
         } else if self.input.is_action_just_pressed("flashlight") {
-            self.base_mut().emit_signal("flashlight", &[]);
+            self.base_mut().emit_signal("toggle_flashlight", &[]);
         }
     }
 

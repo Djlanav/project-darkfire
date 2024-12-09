@@ -1,32 +1,31 @@
-[gd_scene load_steps=4 format=3 uid="uid://dc6g6626uqw4g"]
+[gd_scene load_steps=3 format=3 uid="uid://dc6g6626uqw4g"]
 
 [ext_resource type="PackedScene" uid="uid://cmrfdlp25wcby" path="res://addons/simply-console/scenes/console-window/console_window.tscn" id="1_eshje"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3jpqd"]
 size = Vector3(1, 1.87137, 1)
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_7pdmk"]
-
 [node name="RustPlayer" type="RustPlayer"]
 transform = Transform3D(0.463295, 0, 0, 0, 0.463295, 0, 0, 0, 0.463295, 0, 0.933648, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionBox" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0166173, 0)
 shape = SubResource("BoxShape3D_3jpqd")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_7pdmk")
-
-[node name="PickUpRange" type="RayCast3D" parent="."]
-
-[node name="HoldPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.496593, -1.77096)
-
-[node name="Flashlight" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00381, -0.255437)
-
 [node name="PlayerCamera" type="FirstPersonCamera" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.606264, -0.536221)
+transform = Transform3D(2.15845, 0, 0, 0, 2.15845, 0, 0, 0, 2.15845, 0, 0.606264, 0.00241721)
+
+[node name="Flashlight" type="SpotLight3D" parent="PlayerCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.184181, 0.253435)
+light_energy = 0.0
+spot_range = 4.58794
+spot_angle = 24.2041
+
+[node name="HoldPoint" type="Node3D" parent="PlayerCamera"]
+transform = Transform3D(0.463295, 0, 0, 0, 0.463295, 0, 0, 0, 0.463295, 0, -0.0508101, -0.448699)
+
+[node name="PickUpRange" type="RayCast3D" parent="PlayerCamera"]
+transform = Transform3D(0.463295, 0, 0, 0, 0.463295, 0, 0, 0, 0.463295, 0, -0.280879, 0.371778)
 
 [node name="RustHealthComponent" type="RustHealthComponent" parent="."]
 max_health = 100

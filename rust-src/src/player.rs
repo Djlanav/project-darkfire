@@ -63,9 +63,9 @@ impl ICharacterBody3D for RustPlayer {
             health_component: OnReady::node("RustHealthComponent"),
             input_component: OnReady::node("RustPlayerInputComponent"),
             sfx_man: OnReady::node("SFXComp"),
-            pick_up: OnReady::node("PickUpRange"),
-            hold_point: OnReady::node("HoldPoint"),
-            flashlight: OnReady::node("Flashlight"),
+            pick_up: OnReady::node("PlayerCamera/PickUpRange"),
+            hold_point: OnReady::node("PlayerCamera/HoldPoint"),
+            flashlight: OnReady::node("PlayerCamera/Flashlight"),
             console: OnReady::node("ConsoleWindow"),
 
             speed: 5,
@@ -186,6 +186,10 @@ impl ICharacterBody3D for RustPlayer {
         self.health_component.connect(
             "health_zero",
             &callable_method!(&self_gd, "on_health_zero"));
+
+        self.input_component.connect(
+            "toggle_flashlight",
+           &callable_method!(&self_gd, "on_flashlight_toggled"));
 
 
         self.base_mut().connect("take_damage", &player_damage);

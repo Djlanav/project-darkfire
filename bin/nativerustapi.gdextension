@@ -12,3 +12,6 @@ macos.debug =            "res://rust-src/target/debug/librust_src.dylib"
 macos.release =          "res://rust-src/target/release/librust_src.dylib"
 macos.debug.arm64 =      "res://rust-src/target/debug/librust_src.dylib"
 macos.release.arm64 =    "res://rust-src/target/release/librust_src.dylib"
+
+[icons]
+RustPlayer = "res://icons/RustPlayer3D.svg"
